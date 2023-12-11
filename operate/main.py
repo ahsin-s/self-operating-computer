@@ -14,6 +14,7 @@ import platform
 import Xlib.display
 import Xlib.X
 import Xlib.Xutil  # not sure if Xutil is necessary
+import yaml
 
 from prompt_toolkit import prompt
 from prompt_toolkit.shortcuts import message_dialog
@@ -24,6 +25,7 @@ import matplotlib.font_manager as fm
 from openai import OpenAI
 import sys
 
+config = yaml.safe_load(open('config.yaml', 'r'))
 
 load_dotenv()
 
@@ -442,7 +444,7 @@ def get_next_action_from_openai(messages, objective, accurate_mode):
             "screenshots", "screenshot_with_grid.png"
         )
 
-        add_grid_to_image(screenshot_filename, new_screenshot_filename, 500)
+        add_grid_to_image(screenshot_filename, new_screenshot_filename, config['screenshot']['grid_spacing'])
         # sleep for a second
         time.sleep(1)
 
